@@ -1,11 +1,11 @@
 // builtin
-var fs = require('fs');
+var config = require('./config');
 
 // 3rd party
 var xml2js = require('xml2js');
 
 // load resource file
-var data = fs.readFileSync(__dirname + '/../resources/FIX42.xml');
+var data = config.getData();
 
 var parser = new xml2js.Parser();
 parser.parseString(data, function (err, result) {

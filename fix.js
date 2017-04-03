@@ -1,14 +1,20 @@
-var Server = require('./src/server');
-var Client = require('./src/client');
+var config = require('./src/config');
 
-exports.createServer = function(stream, opt) {
-    return new Server(stream, opt);
+module.exports = function(version) {
+	config.setData(version || '42');
+
+	var Server = require('./src/server');
+	var Client = require('./src/client');
+
+	return {
+		createServer: function(stream, opt) {
+		    return new Server(stream, opt);
+		},
+		createClient: function(stream, opt) {
+		    return new Client(stream, opt);
+		},
+		Errors: require('./src/errors'),
+		Fields: require('./src/fields'),
+		Msgs: require('./src/msgs'),
+	}
 };
-
-exports.createClient = function(stream, opt) {
-    return new Client(stream, opt);
-};
-
-exports.Errors = require('./src/errors');
-exports.Fields = require('./src/fields');
-exports.Msgs = require('./src/msgs');
