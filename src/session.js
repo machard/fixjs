@@ -166,7 +166,7 @@ var Session = function(is_acceptor, opt) {
         var listeners = self.listeners(msg.name).concat();
         if (listeners.length === 0) {
             // admin messages don't need to be handled by the app
-            if (['0', '1', '2', '3', '4', '5', 'A', '8'].indexOf(msg.MsgType) >= 0) {
+            if (['0', '1', '2', '3', '4', '5', 'A', '8', '9'].indexOf(msg.MsgType) >= 0) {
                 return next();
             }
             return next(new RejectWithText('unsupported message type: ' + msg.MsgType, Fields.MsgType));
